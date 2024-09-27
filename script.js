@@ -1,6 +1,7 @@
 let op1 = 0;
 let op2 = 0;
 let operator = "";
+let displayValue = "";
 
 function add(a, b) {
   return a + b;
@@ -34,3 +35,12 @@ function operate(a, b, operator) {
       break;
   }
 }
+
+const buttonsContainer = document.querySelector(".buttons");
+
+buttonsContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("number")) {
+    displayValue += e.target.textContent;
+    document.querySelector("#display").textContent = displayValue;
+  }
+});
