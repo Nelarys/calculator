@@ -1,5 +1,5 @@
-let op1 = 0;
-let op2 = 0;
+let op1;
+let displayingRes = false;
 let operator = "";
 let displayValue = "";
 
@@ -36,11 +36,37 @@ function operate(a, b, operator) {
   }
 }
 
+function display(value) {
+  displayValue = value;
+  document.querySelector("#display").textContent = displayValue;
+}
+
+function calculate() {
+  op1 = operate(op1, +displayValue, operator);
+  displayingRes = true;
+  display(String(op1));
+}
+
 const buttonsContainer = document.querySelector(".buttons");
 
+// Delegate the button clicks
 buttonsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("number")) {
-    displayValue += e.target.textContent;
-    document.querySelector("#display").textContent = displayValue;
+    if (displayingRes) {
+      display("");
+      displayingRes = false;
+    }
+    display(displayValue + e.target.textContent);
+  } else if (e.target.classList.contains("operator")) {
+    if (op1 === undefined) {
+      operator = e.target.id;
+      op1 = +displayValue;
+      display("");
+    } else {
+      calculate();
+      operator = e.target.id;
+    }
+  } else if (e.target.classList.contains("equals")) {
+    calculate();
   }
 });
