@@ -4,7 +4,7 @@ let op1 = null;
 let op2 = null;
 let displayingRes = false;
 let operator = "";
-let displayValue = "";
+let displayValue;
 
 function add(a, b) {
   return a + b;
@@ -39,6 +39,8 @@ function operate(a, b, operator) {
 }
 
 function display(value) {
+  // if value is too large, try rounding. if still too large, do nothing
+  value = value.slice(0, 21);
   displayValue = value;
   document.querySelector("#display").textContent = displayValue;
 }
@@ -93,3 +95,5 @@ buttonsContainer.addEventListener("click", (e) => {
     clear();
   }
 });
+
+display("92.01");
