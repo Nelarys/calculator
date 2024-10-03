@@ -24,23 +24,21 @@ function operate(a, b, operator) {
   switch (operator) {
     case "+":
       return add(a, b);
-      break;
     case "-":
       return subtract(a, b);
-      break;
     case "*":
       return multiply(a, b);
-      break;
     case "/":
+      if (b === 0) return "Who devides by zero is a fool!";
       return divide(a, b);
-      break;
     case "":
       return a;
-      break;
   }
 }
 
 function display(value) {
+  // check if value is not too long
+  // if it is then round
   displayValue = value;
   document.querySelector("#display").textContent = displayValue;
 }
