@@ -77,7 +77,8 @@ button:hover {
     box-shadow: 0 0 10px 5px var(--button-hover-shadow-color);
 }
 
-.operator {
+.operator,
+.equals {
     background-color: var(--operator-bg-color);
 }
 

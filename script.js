@@ -1,4 +1,4 @@
-let op1;
+let op1 = null;
 let displayingRes = false;
 let operator = "";
 let displayValue = "";
@@ -33,6 +33,9 @@ function operate(a, b, operator) {
     case "/":
       return divide(a, b);
       break;
+    case "":
+      return a;
+      break;
   }
 }
 
@@ -43,6 +46,7 @@ function display(value) {
 
 function calculate() {
   op1 = operate(op1, +displayValue, operator);
+  operator = "";
   displayingRes = true;
   display(String(op1));
 }
@@ -58,7 +62,7 @@ buttonsContainer.addEventListener("click", (e) => {
     }
     display(displayValue + e.target.textContent);
   } else if (e.target.classList.contains("operator")) {
-    if (op1 === undefined) {
+    if (op1 === null) {
       operator = e.target.id;
       op1 = +displayValue;
       display("");
@@ -68,5 +72,9 @@ buttonsContainer.addEventListener("click", (e) => {
     }
   } else if (e.target.classList.contains("equals")) {
     calculate();
+  } else if (e.target.classList.contains("clear")) {
+    op1 = null;
+    operator = "";
+    display("");
   }
 });
