@@ -95,5 +95,3 @@ buttonsContainer.addEventListener("click", (e) => {
     clear();
   }
 });
-
-display("92.01");
