@@ -1,4 +1,5 @@
 let op1 = null;
+let op2 = null;
 let displayingRes = false;
 let operator = "";
 let displayValue = "";
@@ -45,10 +46,17 @@ function display(value) {
 }
 
 function calculate() {
-  op1 = operate(op1, +displayValue, operator);
-  operator = "";
+  op2 = op2 === null ? +displayValue : op2;
+  op1 = operate(op1, op2, operator);
   displayingRes = true;
   display(String(op1));
+}
+
+function clear() {
+  op1 = null;
+  op2 = null;
+  operator = "";
+  display("");
 }
 
 const buttonsContainer = document.querySelector(".buttons");
@@ -61,20 +69,22 @@ buttonsContainer.addEventListener("click", (e) => {
       displayingRes = false;
     }
     display(displayValue + e.target.textContent);
+    op2 = null;
   } else if (e.target.classList.contains("operator")) {
     if (op1 === null) {
       operator = e.target.id;
       op1 = +displayValue;
       display("");
     } else {
-      calculate();
+      if (!displayingRes) {
+        calculate();
+        op2 = null;
+      }
       operator = e.target.id;
     }
   } else if (e.target.classList.contains("equals")) {
     calculate();
   } else if (e.target.classList.contains("clear")) {
-    op1 = null;
-    operator = "";
-    display("");
+    clear();
   }
 });
