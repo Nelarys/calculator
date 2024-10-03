@@ -83,7 +83,7 @@ buttonsContainer.addEventListener("click", (e) => {
       operator = e.target.id;
     }
   } else if (e.target.classList.contains("equals")) {
-    calculate();
+    if (displayValue !== "") calculate();
   } else if (e.target.classList.contains("clear")) {
     clear();
   }
