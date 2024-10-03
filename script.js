@@ -1,3 +1,5 @@
+const DEVIDE_BY_ZERO_MESSAGE = "Who devides by zero is a fool!";
+
 let op1 = null;
 let op2 = null;
 let displayingRes = false;
@@ -29,7 +31,7 @@ function operate(a, b, operator) {
     case "*":
       return multiply(a, b);
     case "/":
-      if (b === 0) return "Who devides by zero is a fool!";
+      if (b === 0) return DEVIDE_BY_ZERO_MESSAGE;
       return divide(a, b);
     case "":
       return a;
@@ -37,23 +39,28 @@ function operate(a, b, operator) {
 }
 
 function display(value) {
-  // check if value is not too long
-  // if it is then round
   displayValue = value;
   document.querySelector("#display").textContent = displayValue;
 }
 
 function calculate() {
-  op2 = op2 === null ? +displayValue : op2;
-  op1 = operate(op1, op2, operator);
-  displayingRes = true;
-  display(String(op1));
+  if (op1 !== null) {
+    op2 = op2 === null ? +displayValue : op2;
+    op1 = operate(op1, op2, operator);
+    displayingRes = true;
+    display(String(op1));
+    if (op1 === DEVIDE_BY_ZERO_MESSAGE) reset();
+  }
 }
 
-function clear() {
+function reset() {
   op1 = null;
   op2 = null;
   operator = "";
+}
+
+function clear() {
+  reset();
   display("");
 }
 
